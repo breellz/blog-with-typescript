@@ -2,7 +2,7 @@
   "name": "blog-with-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/app.js",
@@ -36,6 +36,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.7.0",
-    "mongoose": "^6.4.2"
+    "mongoose": "^6.4.2",
+    "validator": "^13.7.0"
   }
 }
