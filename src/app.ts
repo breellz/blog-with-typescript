@@ -1,14 +1,17 @@
+import * as dotenv from 'dotenv';
 import express, {Express}  from 'express'
-import dotenv from 'dotenv';
+dotenv.config()
 import './db/mongoose'
 import  userRouter  from './routes/user'
 
 
-dotenv.config()
 
-const Port = process.env.PORT || 5000
+
+console.log(process.env.PORT)
+console.log(`${process.env.MONGODB_URL}`)
 const app: Express = express()
 
+const Port : string = process.env.PORT
 
 app.use(express.json())
 

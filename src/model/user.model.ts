@@ -1,4 +1,4 @@
-import  { Model, Schema, HydratedDocument,  model } from 'mongoose'
+import  { Model, Schema,  model } from 'mongoose'
 import validator from 'validator';
 import {compare, hash } from 'bcryptjs'
 import  { sign } from 'jsonwebtoken'
@@ -7,13 +7,14 @@ import  { sign } from 'jsonwebtoken'
     name: string
     email: string
     password: string
-    tokens: string[]
+    tokens: {
+        token: string;
+    }[]
     createdAt: Date
     updatedAt: Date
+    //methods
     generateAuthToken(): Promise<string>
 }
-
-
 
  //statics
 interface UserModel extends Model<IUser> {

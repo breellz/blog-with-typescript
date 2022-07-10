@@ -1,7 +1,8 @@
-import {connect} from 'mongoose'
+import mongoose from 'mongoose'
 
-async function run() {
-    await connect('mongodb://127.0.0.1:27017/short-id')
-} 
+const connect = async() => {
+    await mongoose.connect(`${process.env.MONGODB_URL}`)
+    console.log('Connected to MongoDB')
+}
 
-run()
+connect()
