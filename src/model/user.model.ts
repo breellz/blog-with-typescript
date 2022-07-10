@@ -3,7 +3,7 @@ import validator from 'validator';
 import {compare, hash } from 'bcryptjs'
 import  { sign } from 'jsonwebtoken'
 
- interface IUser {
+ export interface IUser {
     name: string
     email: string
     password: string
@@ -104,13 +104,6 @@ userSchema.pre('save', async function(next) {
     next()
 })
 
-//delete user transactions when a user is deleted
-
-// userSchema.pre('remove', async function(next) {
-//     const user = this
-//     await Transaction.deleteMany({ owner: user._id})
-//     next()
-// })
 
 const User = model<IUser, UserModel>('User', userSchema);
 export default User
