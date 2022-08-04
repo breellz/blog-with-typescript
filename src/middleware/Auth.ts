@@ -3,7 +3,7 @@ import { Response, NextFunction } from 'express'
 import User from '../model/user.model'
 import {IGetUserAuthInfoRequest} from '../../definitions/request_definition'
 
-const userAuth = async (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) : Promise<void> => {
+ export const Auth = async (req: any, res: any, next: any)=> {
     try {
         const token: string = req.header('Authorization').replace('Bearer ', '')
         const decoded  = <any>jwt.verify(token, 'bankingapi')
@@ -16,8 +16,7 @@ const userAuth = async (req: IGetUserAuthInfoRequest, res: Response, next: NextF
         req.user = user
         next()
     } catch (error) {
-        res.status(401).send({ error: "You are not authenticated as a user" })
+        res.status(401).send({ error: "You are not authenticated" })
     }
 }
 
-module.exports = userAuth

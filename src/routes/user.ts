@@ -1,10 +1,12 @@
-import { Request, Response, Router} from 'express'
+import  { IRouter, Request, Response, Router} from 'express'
 import User from '../model/user.model'
+import { Auth } from '../middleware/Auth'
+import { IGetUserAuthInfoRequest } from '../../definitions/request_definition'
 
-const userRouter =  Router()
+const router: IRouter =  Router()
 
 //register users
-userRouter.post('/users', async (req: Request, res: Response) => {
+router.post('/users', async (req: Request, res: Response) => {
     const user = new User(req.body)
 
     try {
@@ -18,7 +20,7 @@ userRouter.post('/users', async (req: Request, res: Response) => {
 })
 
 //login users
-userRouter.post('/users/login',  async (req: Request, res: Response) => {
+router.post('/users/login',  async (req: Request, res: Response) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
@@ -29,4 +31,15 @@ userRouter.post('/users/login',  async (req: Request, res: Response) => {
     
 })
 
-export default userRouter
+//logout 
+
+router.post('/users/logout', Auth, async(req: IGetUserAuthInfoRequest, res: Response) => {
+    try {
+        const user = req.user
+
+    } catch (error: any) {
+        res.status(400).send({ error: error.message})
+    }
+})
+
+export {router as userRouter}
